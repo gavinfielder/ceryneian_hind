@@ -6,7 +6,7 @@
 #    By: gfielder <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/15 13:52:12 by gfielder          #+#    #+#              #
-#    Updated: 2019/03/15 15:51:38 by gfielder         ###   ########.fr        #
+#    Updated: 2019/03/15 16:10:28 by gfielder         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,15 @@ secret = keys[1].chomp
 
 # Set up the client credentials
 client = OAuth2::Client.new("#{uid}", "#{secret}", site: "https://api.intra.42.fr")
-token = client.client_credentials.get_token
+while !token
+	begin
+		token = client.client_credentials.get_token
+	rescue
+		puts "Could not connect to the API. Are you connected to the Network? Trying again..."
+		sleep(2)
+	end
+end
+
 
 # Open the file and read each line
 fin = File.open(ARGV[0]).each_line do |line|
