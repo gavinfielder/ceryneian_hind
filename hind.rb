@@ -6,7 +6,7 @@
 #    By: gfielder <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/15 13:52:12 by gfielder          #+#    #+#              #
-#    Updated: 2019/03/15 16:11:36 by gfielder         ###   ########.fr        #
+#    Updated: 2019/03/15 16:13:06 by gfielder         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ secret = keys[1].chomp
 # Set up the client credentials
 client = OAuth2::Client.new("#{uid}", "#{secret}", site: "https://api.intra.42.fr")
 token=0
-while !token
+while token == 0
 	begin
 		token = client.client_credentials.get_token
 	rescue
